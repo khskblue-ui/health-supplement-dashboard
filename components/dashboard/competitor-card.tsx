@@ -58,9 +58,9 @@ export function CompetitorCard({ competitor }: CompetitorCardProps) {
             <div key={product.id} className="flex items-start justify-between gap-2">
               <div className="min-w-0">
                 <p className="truncate text-sm font-medium text-gray-800">{product.product_name}</p>
-                <p className="truncate text-xs text-gray-400">{product.functionality}</p>
+                <p className="truncate text-xs text-gray-400">{product.product_type}</p>
               </div>
-              <span className="shrink-0 text-xs text-gray-400">{product.report_date}</span>
+              <span className="shrink-0 text-xs text-gray-400">{product.mod_dt}</span>
             </div>
           ))}
         </div>

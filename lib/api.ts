@@ -2,8 +2,7 @@ import {
   Competitor,
   DashboardData,
   CompetitorDetail,
-  ProductsResponse,
-  AnalysisData,
+  RegistrationsResponse,
   YearlyRegistration,
 } from './types';
 
@@ -32,30 +31,26 @@ export async function getCompetitorDetail(id: number): Promise<CompetitorDetail>
   return fetchAPI<CompetitorDetail>(`/api/competitors/${id}`);
 }
 
-export async function getCompetitorProducts(
+export async function getCompetitorRegistrations(
   id: number,
   params: {
     period?: 'monthly' | 'yearly';
     year?: number;
     month?: number;
     page?: number;
-    page_size?: number;
+    size?: number;
   } = {}
-): Promise<ProductsResponse> {
+): Promise<RegistrationsResponse> {
   const qs = new URLSearchParams();
   if (params.period) qs.set('period', params.period);
   if (params.year) qs.set('year', String(params.year));
   if (params.month) qs.set('month', String(params.month));
   if (params.page) qs.set('page', String(params.page));
-  if (params.page_size) qs.set('page_size', String(params.page_size));
+  if (params.size) qs.set('size', String(params.size));
   const query = qs.toString();
-  return fetchAPI<ProductsResponse>(`/api/competitors/${id}/registrations${query ? `?${query}` : ''}`);
+  return fetchAPI<RegistrationsResponse>(`/api/competitors/${id}/registrations${query ? `?${query}` : ''}`);
 }
 
 export async function getCompetitorYearly(id: number): Promise<YearlyRegistration[]> {
   return fetchAPI<YearlyRegistration[]>(`/api/competitors/${id}/yearly`);
-}
-
-export async function getAnalysis(): Promise<AnalysisData> {
-  return fetchAPI<AnalysisData>('/api/analysis/production');
 }

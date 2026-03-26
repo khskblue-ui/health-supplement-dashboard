@@ -5,9 +5,8 @@ import {
   getCompetitors,
   getDashboard,
   getCompetitorDetail,
-  getCompetitorProducts,
+  getCompetitorRegistrations,
   getCompetitorYearly,
-  getAnalysis,
 } from '@/lib/api';
 
 export function useCompetitors() {
@@ -41,8 +40,8 @@ export function useCompetitorProducts(
   } = {}
 ) {
   return useQuery({
-    queryKey: ['competitor-products', id, params],
-    queryFn: () => getCompetitorProducts(id, params),
+    queryKey: ['competitor-registrations', id, params],
+    queryFn: () => getCompetitorRegistrations(id, params),
     enabled: !!id,
   });
 }
@@ -52,12 +51,5 @@ export function useCompetitorYearly(id: number) {
     queryKey: ['competitor-yearly', id],
     queryFn: () => getCompetitorYearly(id),
     enabled: !!id,
-  });
-}
-
-export function useAnalysis() {
-  return useQuery({
-    queryKey: ['analysis'],
-    queryFn: () => getAnalysis(),
   });
 }

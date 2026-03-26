@@ -13,12 +13,7 @@ import {
 } from '@tanstack/react-table';
 import { ArrowUpDown, ArrowUp, ArrowDown, ChevronLeft, ChevronRight, Search } from 'lucide-react';
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
+  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -44,73 +39,63 @@ export function RegistrationsTable({ products }: RegistrationsTableProps) {
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
             품목명
-            {column.getIsSorted() === 'asc' ? (
-              <ArrowUp className="h-3 w-3" />
-            ) : column.getIsSorted() === 'desc' ? (
-              <ArrowDown className="h-3 w-3" />
-            ) : (
-              <ArrowUpDown className="h-3 w-3 opacity-40" />
-            )}
+            {column.getIsSorted() === 'asc' ? <ArrowUp className="h-3 w-3" />
+              : column.getIsSorted() === 'desc' ? <ArrowDown className="h-3 w-3" />
+              : <ArrowUpDown className="h-3 w-3 opacity-40" />}
           </button>
         ),
         cell: (info) => (
-          <span className="font-medium text-gray-900">{info.getValue()}</span>
+          <span className="font-medium text-gray-900">{info.getValue() ?? '-'}</span>
         ),
       }),
-      columnHelper.accessor('functionality', {
-        header: '기능성',
+      columnHelper.accessor('product_type', {
+        header: '제품유형',
         cell: (info) => (
-          <span className="text-sm text-gray-600">{info.getValue()}</span>
+          <span className="text-sm text-gray-600">{info.getValue() ?? '-'}</span>
         ),
       }),
-      columnHelper.accessor('raw_material', {
-        header: '원재료',
+      columnHelper.accessor('food_type', {
+        header: '식품구분',
+        cell: (info) => {
+          const v = info.getValue();
+          return v === '건기' ? (
+            <Badge className="bg-blue-100 text-blue-800 border-blue-200" variant="outline">건기식</Badge>
+          ) : v ? (
+            <Badge variant="outline" className="text-gray-500">{v}</Badge>
+          ) : null;
+        },
+      }),
+      columnHelper.accessor('brnch_nm', {
+        header: '공장명',
         cell: (info) => (
-          <span className="text-sm text-gray-500">{info.getValue()}</span>
+          <span className="text-sm text-gray-500">{info.getValue() ?? '-'}</span>
         ),
       }),
-      columnHelper.accessor('report_date', {
+      columnHelper.accessor('mnft_day', {
         header: ({ column }) => (
           <button
             className="flex items-center gap-1 font-medium"
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
-            신고일자
-            {column.getIsSorted() === 'asc' ? (
-              <ArrowUp className="h-3 w-3" />
-            ) : column.getIsSorted() === 'desc' ? (
-              <ArrowDown className="h-3 w-3" />
-            ) : (
-              <ArrowUpDown className="h-3 w-3 opacity-40" />
-            )}
+            제조일
+            {column.getIsSorted() === 'asc' ? <ArrowUp className="h-3 w-3" />
+              : column.getIsSorted() === 'desc' ? <ArrowDown className="h-3 w-3" />
+              : <ArrowUpDown className="h-3 w-3 opacity-40" />}
           </button>
         ),
         cell: (info) => (
           <span className="whitespace-nowrap text-sm text-gray-600">
-            {formatDateKo(info.getValue())}
+            {formatDateKo(info.getValue() ?? '')}
           </span>
         ),
       }),
-      columnHelper.accessor('change_date', {
-        header: '변경일자',
+      columnHelper.accessor('mod_dt', {
+        header: '등록수정일',
         cell: (info) => (
           <span className="whitespace-nowrap text-sm text-gray-500">
-            {formatDateKo(info.getValue())}
+            {formatDateKo(info.getValue() ?? '')}
           </span>
         ),
-      }),
-      columnHelper.accessor('traceability_registered', {
-        header: '이력추적',
-        cell: (info) =>
-          info.getValue() ? (
-            <Badge className="bg-green-100 text-green-800 border-green-200" variant="outline">
-              등록
-            </Badge>
-          ) : (
-            <Badge variant="outline" className="text-gray-400">
-              미등록
-            </Badge>
-          ),
       }),
     ],
     []
@@ -131,18 +116,16 @@ export function RegistrationsTable({ products }: RegistrationsTableProps) {
 
   return (
     <div className="space-y-4">
-      {/* 검색 */}
       <div className="relative max-w-sm">
         <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
         <input
           className="h-9 w-full rounded-md border border-input bg-background pl-9 pr-3 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-          placeholder="품목명, 기능성 검색..."
+          placeholder="품목명, 제품유형 검색..."
           value={globalFilter}
           onChange={(e) => setGlobalFilter(e.target.value)}
         />
       </div>
 
-      {/* 테이블 */}
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -178,7 +161,6 @@ export function RegistrationsTable({ products }: RegistrationsTableProps) {
         </Table>
       </div>
 
-      {/* 페이지네이션 */}
       <div className="flex items-center justify-between text-sm text-gray-500">
         <span>
           총 {table.getFilteredRowModel().rows.length}건 중{' '}
@@ -186,27 +168,14 @@ export function RegistrationsTable({ products }: RegistrationsTableProps) {
           {Math.min(
             (table.getState().pagination.pageIndex + 1) * table.getState().pagination.pageSize,
             table.getFilteredRowModel().rows.length
-          )}
-          건
+          )}건
         </span>
         <div className="flex items-center gap-1">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
+          <Button variant="outline" size="sm" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
             <ChevronLeft className="h-4 w-4" />
           </Button>
-          <span className="px-2">
-            {table.getState().pagination.pageIndex + 1} / {table.getPageCount()}
-          </span>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
+          <span className="px-2">{table.getState().pagination.pageIndex + 1} / {table.getPageCount()}</span>
+          <Button variant="outline" size="sm" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
             <ChevronRight className="h-4 w-4" />
           </Button>
         </div>

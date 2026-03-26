@@ -2,30 +2,42 @@ export interface Competitor {
   id: number;
   name: string;
   name_short: string;
+  total_registrations?: number;
+  created_at?: string;
 }
 
+// I0320 이력추적관리 등록현황 필드
 export interface ProductRegistration {
   id: number;
   competitor_id: number;
-  product_name: string;
-  report_date: string; // YYYY-MM-DD
-  change_date: string;
-  functionality: string;
-  raw_material: string;
-  traceability_registered: boolean;
+  prdlst_report_no: string;
+  product_name: string | null;
+  product_type: string | null;   // PDT_TYPE (비타민D 등)
+  food_type: string | null;      // 건기 / 식품
+  btype: string | null;          // 건강기능식품전문제조업 등
+  brnch_nm: string | null;       // 공장명
+  mnft_day: string | null;       // YYYYMMDD 제조일
+  crcl_prd: string | null;       // YYYYMMDD 유통기한
+  mod_dt: string | null;         // YYYYMMDD 수정일 (월별 집계 기준)
+  reg_num: string | null;
+  food_histrace_num: string | null;
+  barcode: string | null;
   source_api: string;
+  collected_at: string;
 }
 
 export interface DashboardCompetitor {
   id: number;
   name: string;
-  recent_count: number; // 최근 30일 신고 건수
+  name_short: string;
+  recent_count: number;
   last_7_days_count: number;
   latest_products: ProductRegistration[];
 }
 
 export interface DashboardData {
   competitors: DashboardCompetitor[];
+  as_of: string;
 }
 
 export interface MonthlyRegistration {
@@ -39,15 +51,14 @@ export interface CompetitorDetail {
   name_short: string;
   total_registrations: number;
   monthly_trend: MonthlyRegistration[];
+  created_at: string;
 }
 
-export interface ProductsResponse {
-  competitor_id: number;
-  period: 'monthly' | 'yearly';
-  year?: number;
-  month?: number;
+export interface RegistrationsResponse {
   total: number;
-  products: ProductRegistration[];
+  page: number;
+  size: number;
+  items: ProductRegistration[];
 }
 
 export interface YearlyRegistration {
@@ -56,33 +67,6 @@ export interface YearlyRegistration {
 }
 
 export type CompetitorYearlySummary = YearlyRegistration[];
-
-export interface ProductionData {
-  year: number;
-  competitor_id: number;
-  competitor_name: string;
-  production_kg: number;
-}
-
-export interface ProductionByYear {
-  year: number;
-  competitors: Array<{
-    id: number;
-    name: string;
-    production_kg: number;
-  }>;
-}
-
-export interface TrendDataPoint {
-  year_month: string;
-  [productType: string]: string | number;
-}
-
-export interface AnalysisData {
-  production_by_year: ProductionByYear[];
-  trend_data: TrendDataPoint[];
-  product_types: string[];
-}
 
 export const COMPETITOR_COLORS: Record<number, string> = {
   1: '#3B82F6', // blue

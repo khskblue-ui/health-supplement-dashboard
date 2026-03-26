@@ -149,10 +149,10 @@ export default function CompetitorProductsPage() {
               <AlertCircle className="h-5 w-5 shrink-0" />
               <p>데이터를 불러올 수 없습니다.</p>
             </div>
-          ) : data?.products.length === 0 ? (
+          ) : data?.items.length === 0 ? (
             <p className="py-8 text-center text-gray-400">해당 기간에 신고된 품목이 없습니다.</p>
           ) : (
-            <RegistrationsTable products={data?.products ?? []} />
+            <RegistrationsTable products={data?.items ?? []} />
           )}
         </CardContent>
       </Card>

@@ -10,28 +10,27 @@ interface RecentTimelineProps {
 }
 
 interface TimelineItem {
-  product_name: string;
-  report_date: string;
-  functionality: string;
+  product_name: string | null;
+  mod_dt: string | null;
+  product_type: string | null;
+  food_type: string | null;
   competitor_id: number;
   competitor_name: string;
-  traceability_registered: boolean;
 }
 
 export function RecentTimeline({ data }: RecentTimelineProps) {
-  // 전체 최신 신고 20건 수집 및 날짜순 정렬
   const items: TimelineItem[] = data.competitors
     .flatMap((c) =>
       c.latest_products.map((p) => ({
         product_name: p.product_name,
-        report_date: p.report_date,
-        functionality: p.functionality,
+        mod_dt: p.mod_dt,
+        product_type: p.product_type,
+        food_type: p.food_type,
         competitor_id: c.id,
         competitor_name: c.name,
-        traceability_registered: p.traceability_registered,
       }))
     )
-    .sort((a, b) => b.report_date.localeCompare(a.report_date))
+    .sort((a, b) => (b.mod_dt ?? '').localeCompare(a.mod_dt ?? ''))
     .slice(0, 20);
 
   return (
@@ -59,14 +58,14 @@ export function RecentTimeline({ data }: RecentTimelineProps) {
                   {item.competitor_name.replace('(주)', '').trim()}
                 </Badge>
                 <span className="font-medium text-gray-900 text-sm">{item.product_name}</span>
-                {item.traceability_registered && (
-                  <Badge variant="secondary" className="text-xs">이력추적</Badge>
+                {item.food_type === '건기' && (
+                  <Badge variant="secondary" className="text-xs">건기식</Badge>
                 )}
               </div>
               <div className="mt-0.5 flex items-center gap-3 text-xs text-gray-400">
-                <span>{item.functionality}</span>
+                <span>{item.product_type}</span>
                 <span>·</span>
-                <span>{formatDateKo(item.report_date)}</span>
+                <span>{formatDateKo(item.mod_dt ?? '')}</span>
               </div>
             </div>
           </div>

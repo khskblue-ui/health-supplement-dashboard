@@ -8,7 +8,6 @@ import { cn } from '@/lib/utils';
 
 const navItems = [
   { label: '경쟁사 모니터링', href: '/' },
-  { label: '시장 분석', href: '/analysis' },
 ];
 
 export function Navbar() {

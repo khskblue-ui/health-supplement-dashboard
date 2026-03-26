@@ -160,8 +160,8 @@ export default function CompetitorDetailPage() {
                 <div className="space-y-2">
                   {[1, 2, 3].map((i) => <Skeleton key={i} className="h-10 w-full" />)}
                 </div>
-              ) : products?.products ? (
-                <RegistrationsTable products={products.products} />
+              ) : products?.items ? (
+                <RegistrationsTable products={products.items} />
               ) : null}
             </TabsContent>
 
