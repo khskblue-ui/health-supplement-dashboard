@@ -114,6 +114,30 @@
   },
   "hotPaths": [
     {
+      "path": "app/competitors/[id]/page.tsx",
+      "accessCount": 3,
+      "lastAccessed": 1774522865210,
+      "type": "file"
+    },
+    {
+      "path": "components/dashboard/competitor-card.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1774522904697,
+      "type": "file"
+    },
+    {
+      "path": "components/dashboard/recent-timeline.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1774522933116,
+      "type": "file"
+    },
+    {
+      "path": "",
+      "accessCount": 2,
+      "lastAccessed": 1774522958449,
+      "type": "directory"
+    },
+    {
       "path": "next.config.mjs",
       "accessCount": 1,
       "lastAccessed": 1774357188416,
@@ -126,10 +150,28 @@
       "type": "file"
     },
     {
-      "path": "",
+      "path": "lib/utils.ts",
       "accessCount": 1,
-      "lastAccessed": 1774357634712,
+      "lastAccessed": 1774522880968,
       "type": "directory"
+    },
+    {
+      "path": "components/competitors/registrations-table.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1774522884742,
+      "type": "file"
+    },
+    {
+      "path": "lib/mock-data.ts",
+      "accessCount": 1,
+      "lastAccessed": 1774522952980,
+      "type": "file"
+    },
+    {
+      "path": "vercel.json",
+      "accessCount": 1,
+      "lastAccessed": 1774523307916,
+      "type": "file"
     }
   ],
   "userDirectives": []
