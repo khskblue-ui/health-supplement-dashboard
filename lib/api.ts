@@ -6,7 +6,9 @@ import {
   YearlyRegistration,
 } from './types';
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+// Empty string = use Next.js rewrite proxy (production on Vercel)
+// Explicit URL = call backend directly (local dev via NEXT_PUBLIC_API_URL)
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || '';
 
 async function fetchAPI<T>(path: string): Promise<T> {
   const res = await fetch(`${API_BASE}${path}`, {
