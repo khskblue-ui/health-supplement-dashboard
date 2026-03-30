@@ -60,7 +60,7 @@ export default function DashboardPage() {
       <div>
         <h1 className="text-2xl font-bold text-gray-900">경쟁사 모니터링</h1>
         <p className="mt-1 text-sm text-gray-500">
-          4개 경쟁사의 건강기능식품 신규 신고 현황을 모니터링합니다.
+          4개 경쟁사의 건강기능식품 신규 출고 현황을 모니터링합니다.
         </p>
       </div>
 
@@ -76,7 +76,7 @@ export default function DashboardPage() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-base">
             <Clock className="h-4 w-4 text-gray-500" />
-            최근 신규 신고 타임라인
+            최근 신규 출고 타임라인
           </CardTitle>
         </CardHeader>
         <CardContent>

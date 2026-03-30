@@ -78,7 +78,7 @@ export default function CompetitorDetailPage() {
             />
             <h1 className="text-2xl font-bold text-gray-900">{detail.name}</h1>
           </div>
-          <p className="mt-0.5 text-sm text-gray-500">건강기능식품 신고 현황</p>
+          <p className="mt-0.5 text-sm text-gray-500">건강기능식품 출고 현황</p>
         </div>
       </div>
 
@@ -107,7 +107,7 @@ export default function CompetitorDetailPage() {
         <Card className="col-span-2 sm:col-span-1">
           <CardContent className="p-4">
             <div className="flex items-center gap-2">
-              <span className="text-xs text-gray-500">이번 달 신고</span>
+              <span className="text-xs text-gray-500">이번 달 출고</span>
             </div>
             <p className="mt-1 text-2xl font-bold" style={{ color }}>
               {detail.monthly_trend[detail.monthly_trend.length - 1]?.count ?? 0}
@@ -119,7 +119,7 @@ export default function CompetitorDetailPage() {
       {/* 월별 추이 차트 */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">최근 12개월 신고 추이</CardTitle>
+          <CardTitle className="text-base">최근 12개월 출고 추이</CardTitle>
           <CardDescription>월 클릭 시 해당 월 품목 목록으로 이동합니다.</CardDescription>
         </CardHeader>
         <CardContent>
@@ -130,7 +130,7 @@ export default function CompetitorDetailPage() {
       {/* 탭: 월별/연도별 */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">신고 이력</CardTitle>
+          <CardTitle className="text-base">출고 이력</CardTitle>
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="monthly">

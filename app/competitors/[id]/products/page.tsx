@@ -62,7 +62,7 @@ export default function CompetitorProductsPage() {
             />
             <h1 className="text-xl font-bold text-gray-900">품목 드릴다운</h1>
           </div>
-          <p className="mt-0.5 text-sm text-gray-500">{periodLabel} 신고 품목 목록</p>
+          <p className="mt-0.5 text-sm text-gray-500">{periodLabel} 출고 품목 목록</p>
         </div>
       </div>
 
@@ -135,7 +135,7 @@ export default function CompetitorProductsPage() {
       {/* 테이블 */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">{periodLabel} 신고 품목</CardTitle>
+          <CardTitle className="text-base">{periodLabel} 출고 품목</CardTitle>
         </CardHeader>
         <CardContent>
           {isLoading ? (
@@ -150,7 +150,7 @@ export default function CompetitorProductsPage() {
               <p>데이터를 불러올 수 없습니다.</p>
             </div>
           ) : data?.items.length === 0 ? (
-            <p className="py-8 text-center text-gray-400">해당 기간에 신고된 품목이 없습니다.</p>
+            <p className="py-8 text-center text-gray-400">해당 기간에 출고된 품목이 없습니다.</p>
           ) : (
             <RegistrationsTable products={data?.items ?? []} />
           )}

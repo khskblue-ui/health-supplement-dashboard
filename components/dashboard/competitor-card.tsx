@@ -34,7 +34,7 @@ export function CompetitorCard({ competitor }: CompetitorCardProps) {
         </div>
       </CardHeader>
       <CardContent>
-        {/* 최근 30일 신고 건수 */}
+        {/* 최근 30일 출고 건수 */}
         <div className="mb-4 flex items-center gap-3">
           <div
             className="flex h-12 w-12 items-center justify-center rounded-full text-white"
@@ -44,7 +44,7 @@ export function CompetitorCard({ competitor }: CompetitorCardProps) {
           </div>
           <div>
             <p className="text-3xl font-bold text-gray-900">{competitor.recent_count}</p>
-            <p className="text-xs text-gray-500">최근 30일 신규 신고</p>
+            <p className="text-xs text-gray-500">최근 30일 신규 출고</p>
           </div>
         </div>
 
@@ -52,7 +52,7 @@ export function CompetitorCard({ competitor }: CompetitorCardProps) {
         <div className="space-y-2">
           <p className="text-xs font-medium text-gray-500 flex items-center gap-1">
             <Clock className="h-3 w-3" />
-            최신 신고 품목
+            최신 출고 품목
           </p>
           {competitor.latest_products.slice(0, 3).map((product) => (
             <div key={product.id} className="flex items-start justify-between gap-2">
